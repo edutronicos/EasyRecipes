@@ -39,8 +39,8 @@ export default function Home() {
     if (!imageFile) {
       toast({
         variant: "destructive",
-        title: "No image selected",
-        description: "Please upload an image of your ingredients.",
+        title: "Nenhuma imagem selecionada",
+        description: "Por favor, carregue uma imagem dos seus ingredientes.",
       });
       return;
     }
@@ -55,8 +55,8 @@ export default function Home() {
         if (res.error) {
           toast({
             variant: "destructive",
-            title: "Analysis Failed",
-            description: res.error,
+            title: "Falha na Análise",
+            description: "Ocorreu um erro ao analisar a imagem. Por favor, tente novamente.",
           });
         } else {
           setResult(res);
@@ -67,12 +67,12 @@ export default function Home() {
       setIsLoading(false);
       toast({
         variant: "destructive",
-        title: "An unexpected error occurred",
-        description: "Please try again later.",
+        title: "Ocorreu um erro inesperado",
+        description: "Por favor, tente novamente mais tarde.",
       });
     }
   };
-  
+
   const handleReset = () => {
     setImageUrl(null);
     setImageFile(null);
@@ -86,16 +86,16 @@ export default function Home() {
           <ChefHat className="w-10 h-10 text-primary" />
           <h1 className="text-4xl md:text-5xl font-headline font-bold">Chef AI</h1>
         </div>
+
         <p className="text-muted-foreground mt-2 text-lg">
-          Snap a photo of your ingredients and discover what you can cook!
+          Tire uma foto dos seus ingredientes e descubra o que você pode cozinhar!
         </p>
       </header>
-
       <main className="w-full max-w-md">
         <Card className="shadow-lg">
           <CardHeader>
             <CardTitle className="text-center font-headline text-2xl">
-              Upload Your Ingredients
+              Envie seus ingredientes
             </CardTitle>
           </CardHeader>
           <CardContent>
@@ -110,9 +110,9 @@ export default function Home() {
                       objectFit="cover"
                       className="rounded-md"
                     />
-                     <Button variant="destructive" size="icon" className="absolute top-2 right-2 z-10" onClick={handleReset}>
-                        <X className="h-4 w-4" />
-                     </Button>
+                    <Button variant="destructive" size="icon" className="absolute top-2 right-2 z-10" onClick={handleReset}>
+                      <X className="h-4 w-4" />
+                    </Button>
                   </>
                 ) : (
                   <label
@@ -120,8 +120,8 @@ export default function Home() {
                     className="cursor-pointer flex flex-col items-center text-muted-foreground hover:text-primary transition-colors"
                   >
                     <Camera className="w-12 h-12 mb-2" />
-                    <span className="font-semibold">Click to upload</span>
-                    <span className="text-sm">or drag and drop</span>
+                    <span className="font-semibold">Clique para enviar</span>
+                    <span className="text-sm">ou arraste e solte</span>
                   </label>
                 )}
                 <input
@@ -135,14 +135,14 @@ export default function Home() {
 
               {imageUrl && !isLoading && (
                 <Button onClick={handleAnalyze} className="w-full" size="lg">
-                  <Sparkles className="mr-2 h-5 w-5" /> Find Recipes
+                  <Sparkles className="mr-2 h-5 w-5" /> Procurando Receitas
                 </Button>
               )}
 
               {isLoading && (
                 <div className="flex items-center justify-center w-full flex-col space-y-2">
                   <Loader2 className="h-8 w-8 animate-spin text-primary" />
-                  <p className="text-muted-foreground">Analyzing ingredients...</p>
+                  <p className="text-muted-foreground">Analisando ingredientes...</p>
                 </div>
               )}
             </div>
@@ -154,7 +154,7 @@ export default function Home() {
             {result.ingredients.length > 0 && (
               <Card>
                 <CardHeader>
-                  <CardTitle className="flex items-center gap-2 font-headline"><Utensils /> Detected Ingredients</CardTitle>
+                  <CardTitle className="flex items-center gap-2 font-headline"><Utensils /> Ingedientes Detectados</CardTitle>
                 </CardHeader>
                 <CardContent className="flex flex-wrap gap-2">
                   {result.ingredients.map((ingredient) => (
@@ -166,19 +166,24 @@ export default function Home() {
 
             <Card>
               <CardHeader>
-                <CardTitle className="flex items-center gap-2 font-headline"><ChefHat /> Suggested Recipes</CardTitle>
+                <CardTitle className="flex items-center gap-2 font-headline"><ChefHat /> Receitas Sugeridas</CardTitle>
                 {result.recipes.length === 0 && (
-                    <CardDescription>No matching recipes found. Try with different ingredients!</CardDescription>
+                  <CardDescription>Nenhuma receita encontrada. Tente com ingredientes diferentes!</CardDescription>
                 )}
               </CardHeader>
               <CardContent>
-                  <div className="space-y-3">
-                      {result.recipes.map((recipe) => (
-                           <div key={recipe} className="p-4 rounded-md border bg-background hover:bg-muted/50 transition-colors">
-                              <p className="font-semibold text-lg text-primary">{recipe}</p>
-                           </div>
-                      ))}
-                  </div>
+                <div className="space-y-3">
+                  {result.recipes.map((recipe) => (
+                    <div key={recipe.recipeName} className="p-4 rounded-md border bg-background hover:bg-muted/50 transition-colors">
+                      <p className="font-semibold text-lg text-primary">{recipe.recipeName}</p>
+                      {recipe.missingIngredients.length > 0 && (
+                        <p className="text-sm text-muted-foreground mt-1">
+                          Faltando: {recipe.missingIngredients.join(', ')}
+                        </p>
+                      )}
+                    </div>
+                  ))}
+                </div>
               </CardContent>
             </Card>
           </div>

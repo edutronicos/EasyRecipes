@@ -33,11 +33,11 @@ const analyzeIngredientImagePrompt = ai.definePrompt({
   name: 'analyzeIngredientImagePrompt',
   input: {schema: AnalyzeIngredientImageInputSchema},
   output: {schema: AnalyzeIngredientImageOutputSchema},
-  prompt: `You are an AI assistant that analyzes images of ingredients and extracts the names of the ingredients.
+  prompt: `Você é um assistente de IA que analisa imagens de ingredientes e extrai os nomes dos ingredientes.
 
-  Analyze the image and extract the ingredient names. Return a list of ingredient names.
+  Analise a imagem e extraia os nomes dos ingredientes. Retorne uma lista de nomes de ingredientes. Responda sempre em português (PT-BR).
 
-  Image: {{media url=photoDataUri}}
+  Imagem: {{media url=photoDataUri}}
   `,
 });
 
