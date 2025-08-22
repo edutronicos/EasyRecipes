@@ -1,12 +1,12 @@
 // src/ai/flows/analyze-image.ts
 'use server';
 /**
- * @fileOverview A flow that analyzes an image of ingredients and extracts the ingredient names.
- *
- * - analyzeIngredientImage - A function that handles the image analysis process.
- * - AnalyzeIngredientImageInput - The input type for the analyzeIngredientImage function.
- * - AnalyzeIngredientImageOutput - The return type for the analyzeIngredientImage function.
- */
+* @fileOverview Um fluxo que analisa uma imagem de ingredientes e extrai os nomes dos ingredientes.
+*
+* - analyseIngredientImage - Uma função que gerencia o processo de análise de imagens.
+* - AnalyzeIngredientImageInput - O tipo de entrada para a função analyseIngredientImage.
+* - AnalyzeIngredientImageOutput - O tipo de retorno para a função analyseIngredientImage.
+*/
 
 import {ai} from '@/ai/genkit';
 import {z} from 'genkit';
