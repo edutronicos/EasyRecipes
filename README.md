@@ -60,7 +60,7 @@ Abra um Pull Request.
 
 ## 🖼️ Demonstração
 
-Adicione aqui prints de tela ou GIFs mostrando o funcionamento do projeto:
+![Print 01](/src/img/chefAI1.png) | ![Print 02](/src/img/chefAI2.png) | ![Print 03](/src/img/chefAI3.png)
 
 ## 📄 Licença
 
