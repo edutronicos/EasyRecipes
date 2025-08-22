@@ -1,7 +1,7 @@
 "use server";
 
 import { analyzeIngredientImage } from "@/ai/flows/analyze-image";
-import { findMatchingRecipes } from "@/lib/recipes";
+import { suggestRecipes } from "@/ai/flows/suggest-recipes";
 
 export async function getRecipesForImage(photoDataUri: string) {
   try {
@@ -9,19 +9,27 @@ export async function getRecipesForImage(photoDataUri: string) {
     const analysisResult = await analyzeIngredientImage({ photoDataUri });
     const detectedIngredients = analysisResult.ingredients || [];
 
-    // 2. Find matching recipes based on ingredients
-    const matchedRecipes = findMatchingRecipes(detectedIngredients);
+    if (detectedIngredients.length === 0) {
+      return {
+        ingredients: [],
+        recipes: [],
+      };
+    }
+
+    // 2. Suggest recipes based on the detected ingredients
+    const suggestionResult = await suggestRecipes({ ingredients: detectedIngredients });
+    const suggestedRecipes = suggestionResult.recipes || [];
 
     return {
       ingredients: detectedIngredients,
-      recipes: matchedRecipes,
+      recipes: suggestedRecipes,
     };
   } catch (error) {
     console.error("Error in getRecipesForImage action:", error);
     return {
       ingredients: [],
       recipes: [],
-      error: "Failed to analyze image. Please try again.",
+      error: "Failed to process image and suggest recipes. Please try again.",
     };
   }
 }
