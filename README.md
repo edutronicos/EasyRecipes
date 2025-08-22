@@ -60,7 +60,7 @@ Abra um Pull Request.
 
 ## 🖼️ Demonstração
 
-![Print 01](/src/img/chefAI1.png) | ![Print 02](/src/img/chefAI2.png) | ![Print 03](/src/img/chefAI3.png)
+![Print 01](/src/img/chefAI1.png) | ![Print 02](/src/img/chefAI2.png) | ![Print 03](/src/img/chefAi3.png)
 
 ## 📄 Licença
 
