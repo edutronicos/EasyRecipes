@@ -65,4 +65,4 @@ Abra um Pull Request.
 ## 📄 Licença
 
 Este projeto está sob a licença MIT.
-Consulte o arquivo LICENSE(./LICENSE) para mais detalhes.
+Consulte o arquivo [LICENSE](./LICENSE) para mais detalhes.
